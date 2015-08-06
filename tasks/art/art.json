@@ -1,0 +1,15 @@
+{
+  "success" : [
+    "approved.txt",
+    "yoda.txt",
+    "vador.txt"
+  ],
+  "error" : [
+    "yoda.txt",
+    "vador.txt",
+    "cartman-poker-face.txt",
+    "senator-palatine.txt",
+    "vador.txt",
+    "yoda.txt"
+  ]
+}
