@@ -26,7 +26,7 @@ module.exports = function (grunt) {
     },
     jscs    : {
       options : {
-        config : [ process.cwd(), 'tasks/yocto.json' ] .join('/')
+        config : [ __dirname, 'yocto.json' ] .join('/')
       },
       all     : []
     }
@@ -73,7 +73,7 @@ module.exports = function (grunt) {
 
           try {
             // get file path of art place
-            var artPath = [ process.cwd(), 'tasks', 'art', 'art.json' ].join('/');
+            var artPath = [ __dirname, 'art', 'art.json' ].join('/');
 
             if (!grunt.file.exists(artPath)) {
               throw ([ 'art config file"', artPath, '"not found.' ].join(' '));
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
             // define end state
             var sMsg  = {
               file  : _.map(arts[state], function (art) {
-                return [ process.cwd(), 'tasks', 'art', state, art ].join('/');
+                return [ __dirname, 'art', state, art ].join('/');
               }),
               color : error ? 'red' : 'green'
             };
