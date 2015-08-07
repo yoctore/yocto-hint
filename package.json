@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@lab.yocto.digital:yocto-node-modules/grunt-yocto-norme.git"
+    "url": "git@lab.yocto.digital:yocto-node-modules/yocto-hint.git"
   },
   "bugs": {
-    "url": "http://lab.yocto.digital/yocto-node-modules/grunt-yocto-norme/issues"
+    "url": "http://lab.yocto.digital/yocto-node-modules/yocto-hint/issues"
   },
   "licenses": [
   ],

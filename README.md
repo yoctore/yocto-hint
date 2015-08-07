@@ -8,13 +8,13 @@
 
 ```shell
 # If you install from npm registry
-npm install grunt-yocto-norme --save-dev
+npm install yocto-hint --save-dev
 ```
 
 ```shell
 # If your install from yocto lab. Add this line on your package.json
 {
-    "yoctohint" : "git@lab.yocto.digital:yocto-node-modules/grunt-yocto-norme.git"
+    "yoctohint" : "git+ssh://git@lab.yocto.digital:yocto-node-modules/yocto-hint.git"
 }
 ```
 ### Overview & Options
