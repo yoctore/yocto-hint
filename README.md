@@ -33,4 +33,8 @@ grunt.initConfig({
       all : [ 'file.js', 'file2.js', 'file3.js' ]
     }
 });
+
+// load task
+grunt.loadNpmTasks('yoctohint');
+
 ```
