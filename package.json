@@ -1,8 +1,8 @@
 {
-  "name": "grunt-yocto-norme",
-  "description": "Manage and process code usage on yocto",
-  "version": "0.1.0",
-  "homepage": "",
+  "name": "yoctohint",
+  "description": "Manage and process code usage on yocto. Valid current code with JShint and valid code style with JSCS",
+  "version": "1.0.0",
+  "homepage": "http://www.yocto.re",
   "author": {
     "name": "Mathieu ROBERT",
     "email": "mathieu.robert@yocto.re"
@@ -12,28 +12,32 @@
     "url": "git@lab.yocto.digital:yocto-node-modules/grunt-yocto-norme.git"
   },
   "bugs": {
-    "url": ""
+    "url": "http://lab.yocto.digital/yocto-node-modules/grunt-yocto-norme/issues"
   },
   "licenses": [
-    {
-      "type": "MIT",
-      "url": "/blob/master/LICENSE-MIT"
-    }
   ],
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-    "test": "grunt test"
-  },
+  "scripts": {},
   "devDependencies": {
-    "grunt": "~0.4.5"
+    "grunt": "^0.4.5",
+    "grunt-contrib-yuidoc": "^0.9.0",
+    "yuidoc-lucid-theme": "^0.1.1"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "style",
+    "hint",
+    "style",
+    "jscs",
+    "jshint",
+    "yocto",
+    "norme",
+    "rules"
   ],
   "dependencies": {
     "asciify": "^1.3.5",

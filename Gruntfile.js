@@ -1,30 +1,24 @@
-/*
- * grunt-yocto-norme
- * 
- *
- * Copyright (c) 2015 Mathieu ROBERT
- * Licensed under the MIT license.
- */
-
 'use strict';
 
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
+    // default package
+    pkg       : grunt.file.readJSON('package.json'),
     // Configuration to be run (and then tested).
     yoctohint : {
-      options: {
-        jshint : {
-        }
+      options : {
+        jshint : {}
       },
-      all : [ 'test/test-plugin.js', 'tasks/yocto_norme.js' ]
+      all     : [ 'Gruntfile.js', 'tasks/yoctohont.js' ]
     }
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['yoctohint']);
+  // load npm task
+  grunt.loadNpmTasks('grunt-contrib-yuidoc');
+  // Register Task
+  grunt.registerTask('test', [ 'yoctohint' ]);
+  grunt.registerTask('doc', [ 'yuidoc' ]);
 };

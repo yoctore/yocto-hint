@@ -4,15 +4,12 @@ var _         = require('lodash');
 var reporters = require('jshint-stylish').toString();
 var hooker    = require('hooker');
 var chalk     = require('chalk');
+
 /**
  * Default export for grunt yocto-norme-plugin
- *
- * @param {Object} grunt current grunt instance
- */
+ */ 
 module.exports = function (grunt) {
-  /**
-   * Default yocto config for jshint and jscs code style
-   */
+  // Default yocto config for jshint and jscs code style
   var defaultOptions = {
     jshint  : {
       options : {

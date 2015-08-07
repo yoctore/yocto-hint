@@ -67,7 +67,7 @@
     "validateParameterSeparator": ", ",
     "jsDoc": {
         "checkAnnotations" : {
-          "preset" : "jsdoc3",
+          "preset" : "closurecompiler",
           "extra"  : {
             "date" : true,
             "method" : true,
