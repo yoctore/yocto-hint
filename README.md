@@ -1,4 +1,4 @@
-# grunt-yocto-norme
+# yocto-hint
 
 > Manage and process code usage on yocto. Valid current code with JShint and valid code style with JSCS
 
