@@ -28,6 +28,9 @@
   "peerDependencies": {
     "grunt": "~0.4.5"
   },
+  "files": [
+    "tasks"
+  ],  
   "keywords": [
     "gruntplugin",
     "style",
