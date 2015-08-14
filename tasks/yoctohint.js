@@ -9,6 +9,7 @@ var chalk     = require('chalk');
  * Default export for grunt yocto-norme-plugin
  */ 
 module.exports = function (grunt) {
+
   // Default yocto config for jshint and jscs code style
   var defaultOptions = {
     jshint  : {
@@ -67,12 +68,13 @@ module.exports = function (grunt) {
       var aborted = res === 'Aborted due to warnings.';
       var error   = warning || aborted;
 
+      // Is finish ??
       if (done || error) {
         if (currentTask !== undefined) {
           currentTask = error ? false : true;
 
           try {
-            // get file path of art place
+            // Get file path of art place
             var artPath = [ __dirname, 'art', 'art.json' ].join('/');
 
             if (!grunt.file.exists(artPath)) {
@@ -80,10 +82,10 @@ module.exports = function (grunt) {
             }
             var arts  = JSON.parse(grunt.file.read(artPath));
 
-            // is success or error !!!
+            // Is success or error !!!
             var state = error ? 'error' : 'success';
 
-            // define end state
+            // Define end state
             var sMsg  = {
               file  : _.map(arts[state], function (art) {
                 return [ __dirname, 'art', state, art ].join('/');
@@ -91,6 +93,7 @@ module.exports = function (grunt) {
               color : error ? 'red' : 'green'
             };
 
+            // Build message file
             sMsg.file = sMsg.file[_.random(0, sMsg.file.length - 1)];
             console.log(chalk[sMsg.color](grunt.file.read(sMsg.file)));
           } catch (e) {
@@ -99,6 +102,7 @@ module.exports = function (grunt) {
               level : error ? 'warn' : 'ok',
               msg   : error ? 'Please correct your code !!! ' : 'Good Job. Jeune padawan !!'
             };
+
             // Log exeption, but it produces by art config
             grunt.log.warn([ 'Plugin error.', e ].join(' '));
             // Need to log end message with custom param
