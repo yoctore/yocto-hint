@@ -1,6 +1,6 @@
 # yocto-hint
 
-> Manage and process code usage on yocto. Valid current code with JShint and valid code style with JSCS
+> Manage and process code style and usage on yocto. Code is validate with JShint & JSCS
 
 ## How to use
 
