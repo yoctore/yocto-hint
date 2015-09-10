@@ -12,9 +12,9 @@ npm install yocto-hint --save-dev
 ```
 
 ```shell
-# If your install from yocto lab. Add this line on your package.json
+# if you install it from private repository. Add this line on your package.json
 {
-    "yoctohint" : "git+ssh://git@lab.yocto.digital:yocto-node-modules/yocto-hint.git"
+    "yoctohint" : "git+ssh://git@gitlab.com:yocto-node-modules/yocto-hint.git"
 }
 ```
 ### Overview & Options
