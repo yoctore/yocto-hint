@@ -17,7 +17,7 @@ npm install yocto-hint --save-dev
 
 ```shell
 {
-    "yoctohint" : "https://git@gitlab.com/yocto-grunt-modules/yocto-hint.git"
+    "yocto-hint" : "latest"
 }
 ```
 ### Overview & Options
