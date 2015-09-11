@@ -1,20 +1,23 @@
 # yocto-hint
 
-> Manage and process code style and usage on yocto. Code is validate with JShint & JSCS
+> Manage & Valid Code style and usage of javascript on yocto.re 
+> Code is validate with JShint & JSCS
 
 ## How to use
 
 > In your project install our plugin
 
+- If you install from npm registry : 
+
 ```shell
-# If you install from npm registry
 npm install yocto-hint --save-dev
 ```
 
+ - Or add this line on your package.json : 
+
 ```shell
-# if you install it from private repository. Add this line on your package.json
 {
-    "yoctohint" : "git+ssh://git@gitlab.com:yocto-node-modules/yocto-hint.git"
+    "yoctohint" : "https://git@gitlab.com/yocto-grunt-modules/yocto-hint.git"
 }
 ```
 ### Overview & Options
@@ -36,5 +39,4 @@ grunt.initConfig({
 
 // load task
 grunt.loadNpmTasks('yoctohint');
-
 ```

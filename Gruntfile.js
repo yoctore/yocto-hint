@@ -17,8 +17,6 @@ module.exports = function (grunt) {
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
   // load npm task
-  grunt.loadNpmTasks('grunt-contrib-yuidoc');
-  // Register Task
   grunt.registerTask('test', [ 'yoctohint' ]);
-  grunt.registerTask('doc', [ 'yuidoc' ]);
+  grunt.registerTask('default', [ 'test' ]);
 };

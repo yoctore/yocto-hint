@@ -1,6 +1,6 @@
 {
   "name": "yoctohint",
-  "description": "Manage and process code usage on yocto. Valid current code with JShint and valid code style with JSCS",
+  "description": "Manage and process code usage on yocto.re. Valid current code with JShint and valid code style with JSCS",
   "version": "1.0.0",
   "author": {
     "name": "ROBERT Mathieu",
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@lab.yocto.digital:yocto-node-modules/yocto-hint.git"
+    "url": "https://gitlab.com/yocto-grunt-modules/yocto-hint.git"
   },
   "bugs": {
-    "url": "http://lab.yocto.digital/yocto-node-modules/yocto-hint/issues"
+    "url": "https://gitlab.com/yocto-grunt-modules/yocto-hint/issues"
   },
   "licenses" : [
     {
@@ -33,8 +33,7 @@
   "scripts": {},
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-yuidoc": "^0.9.0",
-    "yuidoc-lucid-theme": "^0.1.1"
+    "grunt-contrib-yuidoc": "^0.9.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.5",
