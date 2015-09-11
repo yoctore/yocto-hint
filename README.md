@@ -38,5 +38,5 @@ grunt.initConfig({
 });
 
 // load task
-grunt.loadNpmTasks('yoctohint');
+grunt.loadNpmTasks('yocto-hint');
 ```

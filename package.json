@@ -1,7 +1,7 @@
 {
   "name": "yocto-hint",
   "description": "Manage and process code usage on yocto.re. Valid current code with JShint and valid code style with JSCS",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": {
     "name": "ROBERT Mathieu",
     "email": "mathieu@yocto.re",
