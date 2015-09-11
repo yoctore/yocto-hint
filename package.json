@@ -14,8 +14,7 @@
       "email" : "mathieu@yocto.re"
     }
   ],
-  "repository": {
-    "type": "git",
+  "repository":
     "url": "https://gitlab.com/yocto-grunt-modules/yocto-hint.git"
   },
   "bugs": {
@@ -41,7 +40,8 @@
     "grunt-jscs": "~2.0.0"
   },
   "files": [
-    "tasks"
+    "tasks",
+    "README.md"
   ],  
   "keywords": [
     "grunt",
