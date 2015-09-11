@@ -1,7 +1,7 @@
 {
   "name": "yocto-hint",
   "description": "Manage and process code usage on yocto.re. Valid current code with JShint and valid code style with JSCS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "ROBERT Mathieu",
     "email": "mathieu@yocto.re",
@@ -14,7 +14,7 @@
       "email" : "mathieu@yocto.re"
     }
   ],
-  "repository":
+  "repository" : {
     "url": "https://gitlab.com/yocto-grunt-modules/yocto-hint.git"
   },
   "bugs": {
