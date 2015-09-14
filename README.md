@@ -1,7 +1,5 @@
 # yocto-hint
 
-> Manage & Valid Code style and usage of javascript
-> Code is validate with JShint & JSCS
 
 ## Motivation
 
