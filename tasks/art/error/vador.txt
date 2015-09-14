@@ -1,6 +1,6 @@
   __________________________________________
- | La Force est avec toi jeune yoctowalker  |
- |      Mais tu n'es pas encore un Jedi     |
+ |          The force is with you,          |
+ |        but you are not a Jedi yet.       |
   ------------------------------------------
               o        .-.
                 o     |_:_|
@@ -24,5 +24,5 @@
           |     : : :_/_|  /'._\  '--|_\
           /___.-/_|-'   \  \
                          '-'
-                              Dark vador !
+                             Darth vader !
                               

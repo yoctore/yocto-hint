@@ -1,9 +1,9 @@
   __________________________________________
- |  Je vois que tu t'es fabriqué un nouveau |
- |              sabre laser.                |
- |        Tu as terminé ta formation.       |
- |      Maintenant, tu es très puissant,    |
- |        comme l'avait prévu l'Empereur    |
+ |      I see you have constructed          |
+ |           a new light saber.             |
+ |       Your skills are complete.          |
+ |     Indeed you are powerful as the       |
+ |           Emperor has foreseen.          |
   ------------------------------------------
               o        .-.
                 o     |_:_|
@@ -27,5 +27,5 @@
           |     : : :_/_|  /'._\  '--|_\
           /___.-/_|-'   \  \
                          '-'
-                              Dark vador !
+                             Darth vader !
                               
