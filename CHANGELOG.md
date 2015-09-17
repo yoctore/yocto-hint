@@ -1,3 +1,7 @@
+## 1.1.1 (2015-09-17)
+
+- Assign SPDIX license name on license property
+
 ## 1.1.0 (2015-09-17)
 
 - Changing license naming on package.json

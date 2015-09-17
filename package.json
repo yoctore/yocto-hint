@@ -1,7 +1,7 @@
 {
   "name": "yocto-hint",
   "description": "Manage & Valid Code style and usage of javascript. Code is validate with JShint & JSCS",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "ROBERT Mathieu",
     "email": "mathieu@yocto.re",
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://gitlab.com/yocto-grunt-modules/yocto-hint/issues"
   },
-  "license" : "SEE LICENSE IN LICENSE-2.0.txt",
+  "license" : "APACHE-2.0",
   "engines": {
     "node": ">= 0.8.0"
   },
