@@ -1,11 +1,14 @@
 {
   "name": "yocto-hint",
   "description": "Manage & Valid Code style and usage of javascript. Code is validate with JShint & JSCS",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "author": {
     "name": "ROBERT Mathieu",
     "email": "mathieu@yocto.re",
     "url": "http://www.yocto.re"
+  },
+  "scripts" : {
+    "preinstall" : "npm uninstall grunt-contrib-jshint grunt-jscs"
   },
   "contributors": [],
   "maintainers" : [
@@ -21,24 +24,18 @@
   "bugs": {
     "url": "https://gitlab.com/yocto-grunt-modules/yocto-hint/issues"
   },
-  "licenses" : [
-    {
-      "type" : "Apache-2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.txt"
-    }
-  ],  
+  "license" : "SEE LICENSE IN LICENSE-2.0.txt",
   "engines": {
     "node": ">= 0.8.0"
   },
   "scripts": {},
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-yuidoc": "^0.9.0"
+    "grunt": "^0.4.5"
   },
   "peerDependencies": {
     "grunt": "~0.4.5",
-    "grunt-contrib-jshint": "~0.9.2",
-    "grunt-jscs": "~2.0.0"
+    "grunt-contrib-jshint": ">= 0.11.3",
+    "grunt-jscs": ">= 2.1.0"
   },
   "files": [
     "tasks",
