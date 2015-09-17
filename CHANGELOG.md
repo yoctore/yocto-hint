@@ -1,3 +1,11 @@
+## 1.1.3 (2015-09-17)
+
+- Removing duplicating scripts property on package.json
+
+## 1.1.2 (2015-09-17)
+
+- Changing license name invalid SPDX name
+
 ## 1.1.1 (2015-09-17)
 
 - Assign SPDIX license name on license property
