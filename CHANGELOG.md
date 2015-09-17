@@ -1,10 +1,14 @@
+## 1.1.4 (2015-09-18)
+
+- Adjust Readme.md content
+
 ## 1.1.3 (2015-09-17)
 
-- Removing duplicating scripts property on package.json
+- Removing duplicated scripts property on package.json
 
 ## 1.1.2 (2015-09-17)
 
-- Changing license name invalid SPDX name
+- Change license name because we defined an invalid SPDX name
 
 ## 1.1.1 (2015-09-17)
 
@@ -12,7 +16,7 @@
 
 ## 1.1.0 (2015-09-17)
 
-- Changing license naming on package.json
+- Change license name on package.json
 - Adding preinstall command to uninstall peerDependencies before install module
 - Change peerDependencies version for : 
 
@@ -25,10 +29,10 @@
 
 ## 1.0.12 (2015-09-15)
 
-- Changes README.md with more details on configuration used on yocto-hint module.
+- Add some changes on README.md with more details on configuration used on yocto-hint module.
 
 
 ## 1.0.11 (2015-09-15)
 
-- Adding current CHANGELOG.md file.
+- Add current CHANGELOG.md file.
 - Some fixes with art file show and the end of validation.

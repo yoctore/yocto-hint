@@ -7,15 +7,15 @@ Code style and good programming rules are very important to create a solid and c
 All the time we need to install jshint and jscs separately and we must configure each tools
 for a complete validation.
 
-That why we created this tools, to have a unique tools for a complete programming validation.
+That why we created this tools, to have a unique and ready to use tools for a complete programming validation.
 
-## How to use
+## Installation
 
 ```shell
 npm install yocto-hint --save-dev
 ```
 
-### Installation & Options
+### How to use & options
 In your project's Gruntfile, add a section named `yoctohint` to the data object passed into `grunt.initConfig()`.
 
 ```javascript
@@ -37,7 +37,7 @@ grunt.initConfig({
 grunt.loadNpmTasks('yocto-hint');
 ```
 
-## Used configuration
+## Defined configuration
 
 We used JSHint (http://jshint.com/) with rules below :
 
