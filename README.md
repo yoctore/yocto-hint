@@ -15,7 +15,7 @@ That why we created this tools, to have a unique and ready to use tools for a co
 npm install yocto-hint --save-dev
 ```
 
-### How to use & options
+## Usage & options
 In your project's Gruntfile, add a section named `yoctohint` to the data object passed into `grunt.initConfig()`.
 
 ```javascript
@@ -35,6 +35,11 @@ grunt.initConfig({
 });
 // load task
 grunt.loadNpmTasks('yocto-hint');
+
+// register task
+grunt.registerTask('hint', [ 'yoctohint' ]);
+
+// and run grunt hint in your shell
 ```
 
 ## Defined configuration
