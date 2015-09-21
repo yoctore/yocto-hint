@@ -1,3 +1,7 @@
+## 1.1.6 (2015-09-18)
+
+- Test & Change data on package.json
+
 ## 1.1.5 (2015-09-18)
 
 - Change readme.md content
