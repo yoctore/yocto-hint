@@ -1,8 +1,9 @@
-## 1.2.0 & 1.2.1 (2015-11-03)
+## 1.2.0 & 1.2.1 & 1.2.3 (2015-11-03)
 
 - Remove peer dependencies
 - Change directory before loading task and return on process.cwd()
 - Add dependencies on package.json
+- add script uninstall before install on package.json
 
 ## 1.1.6 (2015-09-18)
 
