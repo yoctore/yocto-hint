@@ -1,7 +1,7 @@
 {
   "name": "yocto-hint",
   "description": "Manage & Valid Code style and usage of javascript. Code is validate with JShint & JSCS",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": {
     "name": "Yocto SAS",
     "email": "technique@yocto.re",
@@ -29,7 +29,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">=4.2.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5"
