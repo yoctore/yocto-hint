@@ -10,7 +10,7 @@ module.exports = function (grunt) {
       options : {
         jshint : {}
       },
-      all     : [ 'Gruntfile.js', 'tasks/yoctohont.js' ]
+      all     : [ 'Gruntfile.js', 'tasks/yoctohint.js' ]
     }
   });
 

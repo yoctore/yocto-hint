@@ -4,6 +4,7 @@ var _         = require('lodash');
 var reporters = require('jshint-stylish').toString();
 var hooker    = require('hooker');
 var chalk     = require('chalk');
+var path      = require('path');
 
 /**
  * Default export for grunt yocto-norme-plugin
@@ -178,8 +179,15 @@ module.exports = function (grunt) {
       grunt.task.run('yoctohint:hintchecker');
     }
   });
+  // save initial path
+  var cwd = process.cwd();
+  // change path to yocto-hint modules
+  process.chdir(path.normalize([ process.cwd(), 'node_modules',
+                                'yocto-hint', 'node_modules' ].join('/')));
 
   // Load grunt needed task
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
+  // return to the initial path
+  process.chdir(cwd);
 };

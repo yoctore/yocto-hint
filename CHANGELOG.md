@@ -1,3 +1,8 @@
+## 1.2.0 (2015-11-03)
+
+- Remove peer dependencies
+- Change directory before loading task and return on process.cwd()
+
 ## 1.1.6 (2015-09-18)
 
 - Test & Change data on package.json
