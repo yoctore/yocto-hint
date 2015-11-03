@@ -11,6 +11,8 @@ That why we created this tools, to have a unique and ready to use tools for a co
 
 ## Installation
 
+**BEFORE anything you need to uninstall `grunt-contrib-jshint` and `grunt-jscs`** these package will be installed with current tools
+
 ```shell
 npm install yocto-hint --save-dev
 ```
