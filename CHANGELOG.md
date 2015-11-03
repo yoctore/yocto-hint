@@ -1,4 +1,4 @@
-## 1.2.0 <=> 1.2.4 (2015-11-03)
+## 1.2.0 <=> 1.2.5 (2015-11-03)
 
 - Remove peer dependencies
 - Change directory before loading task and return on process.cwd()

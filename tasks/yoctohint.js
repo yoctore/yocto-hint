@@ -182,8 +182,7 @@ module.exports = function (grunt) {
   // save initial path
   var cwd = process.cwd();
   // change path to yocto-hint modules
-  process.chdir(path.normalize([ process.cwd(), 'node_modules',
-                                'yocto-hint', 'node_modules' ].join('/')));
+  process.chdir(path.normalize([ __dirname, '..' ].join('/')));
 
   // Load grunt needed task
   grunt.loadNpmTasks('grunt-contrib-jshint');
