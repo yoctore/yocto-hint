@@ -1,4 +1,4 @@
-# yocto-hint
+![alt text](https://david-dm.org/yoctore/yocto-daemon.svg "Dependencies Status")
 
 ## Motivation
 
@@ -10,8 +10,6 @@ for a complete validation.
 That why we created this tools, to have a unique and ready to use tools for a complete programming validation.
 
 ## Installation
-
-**BEFORE anything you need to uninstall `grunt-contrib-jshint` and `grunt-jscs`** these package will be installed with current tools
 
 ```shell
 npm install yocto-hint --save-dev
