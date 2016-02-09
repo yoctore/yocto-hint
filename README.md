@@ -1,4 +1,4 @@
-![alt text](https://david-dm.org/yoctore/yocto-daemon.svg "Dependencies Status")
+![alt text](https://david-dm.org/yoctore/yocto-hint.svg "Dependencies Status")
 
 ## Motivation
 
