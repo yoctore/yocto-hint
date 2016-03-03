@@ -1,4 +1,7 @@
 ![alt text](https://david-dm.org/yoctore/yocto-hint.svg "Dependencies Status")
+[![Code Climate](https://codeclimate.com/github/yoctore/yocto-hint/badges/gpa.svg)](https://codeclimate.com/github/yoctore/yocto-hint)
+[![Test Coverage](https://codeclimate.com/github/yoctore/yocto-hint/badges/coverage.svg)](https://codeclimate.com/github/yoctore/yocto-hint/coverage)
+[![Issue Count](https://codeclimate.com/github/yoctore/yocto-hint/badges/issue_count.svg)](https://codeclimate.com/github/yoctore/yocto-hint)
 
 ## Motivation
 
@@ -8,6 +11,8 @@ All the time we need to install jshint and jscs separately and we must configure
 for a complete validation.
 
 That why we created this tools, to have a unique and ready to use tools for a complete programming validation.
+
+***NEW : Check your code vulnerability with : [grunt-nsp](https://www.npmjs.com/package/grunt-nsp)***
 
 ## Installation
 

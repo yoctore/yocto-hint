@@ -30,6 +30,9 @@ module.exports = function (grunt) {
         config : [ __dirname, 'yocto.json' ] .join('/')
       },
       all     : []
+    },
+    nsp     : {
+      package : grunt.file.readJSON([ process.cwd(), 'package.json' ].join('/'))
     }
   };
 
@@ -37,17 +40,30 @@ module.exports = function (grunt) {
   grunt.config.set('jshint', defaultOptions.jshint);
   grunt.config.set('jscs', defaultOptions.jscs);
 
+  // shrinkwrap file path
+  var shrinkwrap = [ process.cwd(), 'npm-shrinkwrap.json' ].join('/');
+  var nsp        = defaultOptions.nsp;
+  // nsp shrinkwrap exists ?
+  if (grunt.file.exists(shrinkwrap)) {
+    // shrinkwrap data
+    nsp = _.merge(nsp, {
+      shrinkwrap : JSON.parse(grunt.file.read(shrinkwrap))
+    });
+  }
+
+  // append nsp on hint
+  grunt.config.set('nsp', nsp);
+
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerTask('yoctohint:hintchecker', 'My hint checker', function () {
     // Current internal Task
     var currentTask;
-
     // Filte task to get correct task to process.
     // Keep safe all other task in grunt config
     var tasks = _.filter(Object.keys(grunt.config.data), function (key) {
-      return (key === 'jshint' || key === 'jscs');
+      return (key === 'jshint' || key === 'jscs' || key === 'nsp');
     });
 
     // Hook grunt task execution
@@ -114,6 +130,7 @@ module.exports = function (grunt) {
 
     // Run each given task
     _.each(tasks, function (task) {
+      console.log(task);
       grunt.task.run(task);
     });
   });
@@ -178,6 +195,7 @@ module.exports = function (grunt) {
       grunt.task.run('yoctohint:hintchecker');
     }
   });
+
   // save initial path
   var cwd = process.cwd();
   // change path to yocto-hint modules
@@ -186,6 +204,8 @@ module.exports = function (grunt) {
   // Load grunt needed task
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-nsp');
+
   // return to the initial path
   process.chdir(cwd);
 };

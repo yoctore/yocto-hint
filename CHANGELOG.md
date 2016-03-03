@@ -1,3 +1,7 @@
+## 1.3.0 (2016-03-01)
+
+- Add nsp security check on tools
+
 ## 1.2.0 <=> 1.2.5 (2015-11-03)
 
 - Remove peer dependencies
