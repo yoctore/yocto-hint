@@ -130,7 +130,6 @@ module.exports = function (grunt) {
 
     // Run each given task
     _.each(tasks, function (task) {
-      console.log(task);
       grunt.task.run(task);
     });
   });
