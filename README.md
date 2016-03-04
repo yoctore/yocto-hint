@@ -4,8 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/yoctore/yocto-hint/badges/gpa.svg)](https://codeclimate.com/github/yoctore/yocto-hint)
 [![Test Coverage](https://codeclimate.com/github/yoctore/yocto-hint/badges/coverage.svg)](https://codeclimate.com/github/yoctore/yocto-hint/coverage)
 [![Issue Count](https://codeclimate.com/github/yoctore/yocto-hint/badges/issue_count.svg)](https://codeclimate.com/github/yoctore/yocto-hint)
-[![Build Status](https://travis-ci.org/yoctore/yocto-orika.svg?branch=master)](https://travis-ci.org/yoctore/yocto-orika)
-
+[![Build Status](https://travis-ci.org/yoctore/yocto-hint.svg?branch=master)](https://travis-ci.org/yoctore/yocto-hint)
 
 ## Motivation
 
