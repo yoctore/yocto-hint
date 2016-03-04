@@ -1,7 +1,11 @@
+[![NPM](https://nodei.co/npm/yocto-hint.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/yocto-hint/)
+
 ![alt text](https://david-dm.org/yoctore/yocto-hint.svg "Dependencies Status")
 [![Code Climate](https://codeclimate.com/github/yoctore/yocto-hint/badges/gpa.svg)](https://codeclimate.com/github/yoctore/yocto-hint)
 [![Test Coverage](https://codeclimate.com/github/yoctore/yocto-hint/badges/coverage.svg)](https://codeclimate.com/github/yoctore/yocto-hint/coverage)
 [![Issue Count](https://codeclimate.com/github/yoctore/yocto-hint/badges/issue_count.svg)](https://codeclimate.com/github/yoctore/yocto-hint)
+[![Build Status](https://travis-ci.org/yoctore/yocto-orika.svg?branch=master)](https://travis-ci.org/yoctore/yocto-orika)
+
 
 ## Motivation
 
@@ -12,7 +16,7 @@ for a complete validation.
 
 That why we created this tools, to have a unique and ready to use tools for a complete programming validation.
 
-***NEW : Check your code vulnerability with : [grunt-nsp](https://www.npmjs.com/package/grunt-nsp)***
+***NEW : Check your node vulnerability with : [grunt-nsp](https://www.npmjs.com/package/grunt-nsp)***
 
 ## Installation
 
