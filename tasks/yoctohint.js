@@ -1,76 +1,80 @@
 'use strict';
 
 var _         = require('lodash');
-var reporters = require('jshint-stylish').toString();
 var hooker    = require('hooker');
 var chalk     = require('chalk');
 var path      = require('path');
+var semver    = require('semver');
+var timegrunt = require('time-grunt');
 
 /**
  * Default export for grunt yocto-norme-plugin
+ *
+ * @param {string} grunt default grunt instance to use on current module
+ * @return {function} hinter task module
  */
 module.exports = function (grunt) {
+  // Save current path
+  var cwd = process.cwd();
+
   // Default yocto config for jshint and jscs code style
   var defaultOptions = {
-    jshint  : {
+    eslint : {
       options : {
-        curly     : true,
-        node      : true,
-        yui       : true,
-        eqeqeq    : true,
-        unused    : true,
-        undef     : true,
-        freeze    : true,
-        reporter  : reporters
+        cache       : false,
+        configFile  : [ __dirname, '/yocto-eslintrc.yaml' ].join('/'),
+        fix         : false,
+        format      : 'stylish',
+        maxWarnings : 0,
+        quiet       : false,
+        rules       : {}
       },
-      all     : []
+      target : []
     },
-    jscs    : {
-      options : {
-        config : [ __dirname, 'yocto.json' ] .join('/')
-      },
-      all     : []
-    },
-    nsp     : {
+    nsp : {
       package : grunt.file.readJSON([ process.cwd(), 'package.json' ].join('/'))
-    }
+    },
+    pagespeed : {}
   };
 
-  // Append default options to grunt config
-  grunt.config.set('jshint', defaultOptions.jshint);
-  grunt.config.set('jscs', defaultOptions.jscs);
-
-  // shrinkwrap file path
+  // Shrinkwrap file path
   var shrinkwrap = [ process.cwd(), 'npm-shrinkwrap.json' ].join('/');
   var nsp        = defaultOptions.nsp;
-  // nsp shrinkwrap exists ?
+
+  // Require external module time grunt to get metrics on execution task
+  timegrunt(grunt);
+
+  // Append default options to grunt config
+  grunt.config.set('eslint', defaultOptions.eslint);
+
+  // Nsp shrinkwrap exists ?
   if (grunt.file.exists(shrinkwrap)) {
-    // shrinkwrap data
+    // Shrinkwrap data
     nsp = _.merge(nsp, {
       shrinkwrap : JSON.parse(grunt.file.read(shrinkwrap))
     });
   }
 
-  // append nsp on hint
+  // Append nsp on hint
   grunt.config.set('nsp', nsp);
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
+  // Create my main task to process all check we need
   grunt.registerTask('yoctohint:hintchecker', 'My hint checker', function () {
     // Current internal Task
     var currentTask;
-    // Filte task to get correct task to process.
+
+    // Filter task to get correct task to process.
     // Keep safe all other task in grunt config
     var tasks = _.filter(Object.keys(grunt.config.data), function (key) {
-      return (key === 'jshint' || key === 'jscs' || key === 'nsp');
+      return key === 'eslint' || key === 'nsp';
     });
 
     // Hook grunt task execution
     hooker.hook(grunt.task, 'runTaskFn', {
       pre : function (context) {
-        if (currentTask !== undefined) {
-          currentTask = true; // true indicates the task has finished successfully.
+        if (!_.isUndefined(currentTask)) {
+          // True indicates the task has finished successfully.
+          currentTask = true;
         }
         currentTask = context.nameArgs;
       }
@@ -78,49 +82,58 @@ module.exports = function (grunt) {
 
     // Hook into the success / fail writer.
     hooker.hook(grunt.log.writeln(), [ 'success', 'fail' ], function (res) {
-      // check done or aborted
+      // Check done or aborted
       var done    = res === 'Done, without errors.';
       var warning = res === 'Done, but with warnings.';
       var aborted = res === 'Aborted due to warnings.';
       var error   = warning || aborted;
+      var state   = error ? 'error' : 'success';
+      var arts;
+      var artPath;
+      var sMsg;
+
+      // Default message config
+      var cMsg = {
+        level : error ? 'warn' : 'ok',
+        msg   : error ? 'Please correct your code !!! ' : 'Good Job. Padawan !!'
+      };
 
       // Is finish ??
       if (done || error) {
-        if (currentTask !== undefined) {
-          currentTask = error ? false : true;
+        if (!_.isUndefined(currentTask)) {
+          // Need to set state before continue
+          currentTask = error;
 
+          // Main try catch to any errors
           try {
-            // Get file path of art place
-            var artPath = [ __dirname, 'art', 'art.json' ].join('/');
+            // Get file path of art path
+            artPath = [ __dirname, 'art', 'art.json' ].join('/');
 
+            // Getting file exists ?
             if (!grunt.file.exists(artPath)) {
-              throw ([ 'art config file"', artPath, '"not found.' ].join(' '));
+              throw [ 'art config file"', artPath, '"not found.' ].join(' ');
             }
-            var arts  = JSON.parse(grunt.file.read(artPath));
 
-            // Is success or error !!!
-            var state = error ? 'error' : 'success';
+            // Select correct arts file content to print
+            arts = JSON.parse(grunt.file.read(artPath));
 
             // Define end state
-            var sMsg  = {
+            sMsg = {
+              color : error ? 'red' : 'green',
               file  : _.map(arts[state], function (art) {
                 return [ __dirname, 'art', state, art ].join('/');
-              }),
-              color : error ? 'red' : 'green'
+              })
             };
 
             // Build message file
             sMsg.file = sMsg.file[_.random(0, sMsg.file.length - 1)];
+
+            // Log message to console
             console.log(chalk[sMsg.color](grunt.file.read(sMsg.file)));
           } catch (e) {
-            // default message config
-            var cMsg = {
-              level : error ? 'warn' : 'ok',
-              msg   : error ? 'Please correct your code !!! ' : 'Good Job. Jeune padawan !!'
-            };
-
             // Log exeption, but it produces by art config
             grunt.log.warn([ 'Plugin error.', e ].join(' '));
+
             // Need to log end message with custom param
             grunt.log[cMsg.level](cMsg.msg);
           }
@@ -135,76 +148,75 @@ module.exports = function (grunt) {
   });
 
   // Register default plugin process
-  grunt.registerMultiTask('yoctohint',
-    'Manage and process code usage on yocto. Process jshint and jscs', function () {
-    // retrive options
+  grunt.registerMultiTask('yoctohint', 'Manage and process code usage on yocto.', function () {
+    // Retrieve current options
     var options = this.options();
 
-    // keep only with options -- boolean type only
-    _.omit(options.jshint, function (o) {
-      return !_.isBoolean(o) || (!_.isString(o) && !_.isEmpty(o));
-    });
+    // We need to set some default before start the main process
+    options.eslint = options.eslint || {};
+    options.eslint.rules = options.eslint.rules || {};
+    options.eslint.env = options.eslint.env || {};
 
-    // check if jshint option is given
-    if (!_.isUndefined(options.jshint) && !_.isNull(options.jshint) &&
-      _.isObject(options.jshint) && !_.isEmpty(options.jshint)) {
-
-      // Log message and merge options
-      grunt.log.ok('New jshint options given for yocto norme. Processing update.');
-      _.merge(grunt.config.data.jshint.options, options.jshint);
+    // ES6 is enabled ?
+    if (!options.eslint.env.es6) {
+      // In case of ES6 env is not specified we need to remove ES6 rules to keep safe our validator
+      _.set(defaultOptions.eslint.options.rules, 'no-var', 'off');
     }
 
     // Filter file and return correct file path
     this.data = this.filesSrc.map(function (filepath) {
-      // exists ?
+      // File is exists ?
       if (!grunt.file.exists(filepath)) {
         grunt.log.warn([ 'Source file"', filepath, '"not found.' ].join(' '));
 
-        // bash value retutning false
+        // Bash value returning false
         return false;
-      } else {
-        grunt.log.ok([ 'Source file "', filepath, '"exists. adding on filter list.'].join(' '));
-
-        // return file path
-        return filepath;
       }
+
+      // Notify to console
+      grunt.log.ok([ 'Source file "', filepath, '"exists. adding on filter list.' ].join(' '));
+
+      // Return file path
+      return filepath;
     });
 
     // Has data ?
     if (!_.isEmpty(this.data)) {
-      // notify console
+      // Notify console
       grunt.log.ok([
-        this.data.length,
-        [ 'file', (this.data.length > 1 ? 's' : '') ].join(''),
+        this.data.length, [ 'file', this.data.length > 1 ? 's' : '' ].join(''),
         'found. Adding on hinter list.'
       ].join(' '));
 
       // Assign default options to config file
-      defaultOptions.jshint.all = this.data;
-      defaultOptions.jscs.all   = this.data;
+      defaultOptions.eslint.target = this.data;
 
       // Merge config data to grunt config
-      grunt.config.merge('jshint', defaultOptions.jshint);
-      grunt.config.merge('jscs', defaultOptions.jscs);
+      grunt.config.merge('eslint', defaultOptions.eslint);
 
-      // notif console
-      grunt.log.ok('Processing yoctohint:checker ...');
+      // Notif console
+      grunt.log.ok('Ready to process checker ...');
 
       // Run tasks
       grunt.task.run('yoctohint:hintchecker');
     }
   });
 
-  // save initial path
-  var cwd = process.cwd();
-  // change path to yocto-hint modules
-  process.chdir(path.normalize([ __dirname, '..' ].join('/')));
+  // Node version is lower than last node LTS version ?
+  if (semver.lt(process.version, '6.10.3')) {
+    // Logging message
+    grunt.log.ok([ 'Changing cwd directory to load modules because version of node is',
+      process.version ].join(' '));
+
+    // Change path to yocto-hint modules
+    process.chdir(path.normalize([ __dirname, '..' ].join('/')));
+  }
 
   // Load grunt needed task
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-nsp');
+  grunt.loadNpmTasks('grunt-pagespeed');
+  grunt.loadNpmTasks('grunt-eslint');
 
-  // return to the initial path
+  // Go to the initial path
   process.chdir(cwd);
 };
