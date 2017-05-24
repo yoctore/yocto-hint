@@ -17,6 +17,9 @@ module.exports = function (grunt) {
   // Save current path
   var cwd = process.cwd();
 
+  // Default state, by default is a success, if any error occured
+  var globalState = true;
+  
   // Default yocto config for jshint and jscs code style
   var defaultOptions = {
     eslint : {
@@ -44,9 +47,6 @@ module.exports = function (grunt) {
   // Require external module time grunt to get metrics on execution task
   timegrunt(grunt);
 
-  // Append default options to grunt config
-  grunt.config.set('eslint', defaultOptions.eslint);
-
   // Nsp shrinkwrap exists ?
   if (grunt.file.exists(shrinkwrap)) {
     // Shrinkwrap data
@@ -57,6 +57,14 @@ module.exports = function (grunt) {
 
   // Append nsp on hint
   grunt.config.set('nsp', nsp);
+
+  // Append default options to grunt config
+  grunt.config.set('eslint', defaultOptions.eslint);
+
+
+  grunt.registerTask('yoctohint:nspcheckeer', 'Main checker for nsp security rules', function() {
+    
+  });
 
   // Create my main task to process all check we need
   grunt.registerTask('yoctohint:hintchecker', 'My hint checker', function () {
@@ -91,7 +99,7 @@ module.exports = function (grunt) {
       var arts;
       var artPath;
       var sMsg;
-
+console.log(state);
       // Default message config
       var cMsg = {
         level : error ? 'warn' : 'ok',
