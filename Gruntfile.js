@@ -8,13 +8,13 @@ module.exports = function (grunt) {
 
     // Configuration to be run (and then tested).
     yoctohint : {
-      all     : [ 'Gruntfile.js', 'tasks/yoctohint.js' ],
-      options : {
-        pagespeed : {
-          config : {},
-          enable : false
-        }
-      }
+      json : [
+        'package.json'
+      ],
+      node : [
+        'Gruntfile.js',
+        'tasks/yoctohint.js'
+      ]
     }
   });
 

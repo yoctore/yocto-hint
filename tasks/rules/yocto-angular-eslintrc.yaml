@@ -1,0 +1,2 @@
+# http://eslint.org/docs/rules/
+extends: [ "./yocto-node-es5-eslintrc.yaml", "plugin:angular/johnpapa" ]

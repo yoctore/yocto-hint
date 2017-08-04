@@ -6,6 +6,11 @@ var chalk     = require('chalk');
 var path      = require('path');
 var semver    = require('semver');
 var timegrunt = require('time-grunt');
+var treeify   = require('treeify');
+var eslint    = require('eslint');
+var inquirer  = require('inquirer');
+var os        = require('os');
+var money     = require('money-math');
 
 /**
  * Default export for grunt yocto-norme-plugin
@@ -14,18 +19,24 @@ var timegrunt = require('time-grunt');
  * @return {function} hinter task module
  */
 module.exports = function (grunt) {
+  // Require external module time grunt to get metrics on execution task
+  timegrunt(grunt);
+
+  // Flag to define is force fix was set
+  var forceFix = false;
+
+  // Define Global Grade
+  var globalGrade = 20.00;
+
   // Save current path
   var cwd = process.cwd();
 
-  // Default state, by default is a success, if any error occured
-  var globalState = true;
-  
   // Default yocto config for jshint and jscs code style
   var defaultOptions = {
     eslint : {
       options : {
         cache       : false,
-        configFile  : [ __dirname, '/yocto-eslintrc.yaml' ].join('/'),
+        configFile  : '',
         fix         : false,
         format      : 'stylish',
         maxWarnings : 0,
@@ -33,185 +44,331 @@ module.exports = function (grunt) {
         rules       : {}
       },
       target : []
-    },
-    nsp : {
-      package : grunt.file.readJSON([ process.cwd(), 'package.json' ].join('/'))
-    },
-    pagespeed : {}
+    }
   };
 
-  // Shrinkwrap file path
-  var shrinkwrap = [ process.cwd(), 'npm-shrinkwrap.json' ].join('/');
-  var nsp        = defaultOptions.nsp;
+  // Define hooker for the last step of hinter
+  hooker.hook(grunt.log.writeln(), [ 'success', 'fail' ], function (res) {
+    // Check done or aborted
+    var done    = res === 'Done, without errors.' || 'Done.';
+    var warning = res === 'Done, but with warnings.';
+    var aborted = res === 'Aborted due to warnings.';
+    var error   = warning || aborted;
+    var state   = error ? 'error' : 'success';
+    var arts;
+    var artPath;
+    var sMsg;
 
-  // Require external module time grunt to get metrics on execution task
-  timegrunt(grunt);
+    // Default message config
+    var cMsg = {
+      level : error ? 'warn' : 'ok',
+      msg   : error ? 'Please correct your code !!! ' : 'Good Job. Padawan !!'
+    };
 
-  // Nsp shrinkwrap exists ?
-  if (grunt.file.exists(shrinkwrap)) {
-    // Shrinkwrap data
-    nsp = _.merge(nsp, {
-      shrinkwrap : JSON.parse(grunt.file.read(shrinkwrap))
-    });
-  }
+    // Is finish ??
+    if (done || error) {
+      // Main try catch to any errors
+      try {
+        // Get file path of art path
+        artPath = [ __dirname, 'art', 'art.json' ].join('/');
 
-  // Append nsp on hint
-  grunt.config.set('nsp', nsp);
+        // Getting file exists ?
+        if (!grunt.file.exists(artPath)) {
+          throw [ 'art config file"', artPath, '"not found.' ].join(' ');
+        }
 
-  // Append default options to grunt config
-  grunt.config.set('eslint', defaultOptions.eslint);
+        // Select correct arts file content to print
+        arts = JSON.parse(grunt.file.read(artPath));
 
+        // Define end state
+        sMsg = {
+          color : error ? 'red' : 'green',
+          file  : _.map(arts[state], function (art) {
+            return [ __dirname, 'art', state, art ].join('/');
+          })
+        };
 
-  grunt.registerTask('yoctohint:nspcheckeer', 'Main checker for nsp security rules', function() {
-    
+        // Build message file
+        sMsg.file = sMsg.file[_.random(0, sMsg.file.length - 1)];
+
+        // Log message to console
+        console.log(chalk[sMsg.color](grunt.file.read(sMsg.file)));
+
+        // Print grade
+        console.log(chalk[sMsg.color]([ 'Your grade is : ', globalGrade, '/20' ].join('')));
+      } catch (e) {
+        // Log exeption, but it produces by art config
+        grunt.log.warn([ 'Plugin error.', e ].join(' '));
+
+        // Need to log end message with custom param
+        grunt.log[cMsg.level](cMsg.msg);
+      }
+    }
   });
 
   // Create my main task to process all check we need
-  grunt.registerTask('yoctohint:hintchecker', 'My hint checker', function () {
-    // Current internal Task
-    var currentTask;
+  grunt.registerTask('yoctohint:lintchecker', 'Main lint process', function (target) {
+    // Get configuration for current linter
+    var configuration = grunt.option('eslint');
 
-    // Filter task to get correct task to process.
-    // Keep safe all other task in grunt config
-    var tasks = _.filter(Object.keys(grunt.config.data), function (key) {
-      return key === 'eslint' || key === 'nsp';
-    });
+    // Get options
+    var options       = configuration.options;
 
-    // Hook grunt task execution
-    hooker.hook(grunt.task, 'runTaskFn', {
-      pre : function (context) {
-        if (!_.isUndefined(currentTask)) {
-          // True indicates the task has finished successfully.
-          currentTask = true;
-        }
-        currentTask = context.nameArgs;
+    // Get correct formatter
+    var formatter = eslint.CLIEngine.getFormatter(options.format);
+
+    // Formatter is defined ?
+    if (!formatter) {
+      // A warning message
+      grunt.log.warn([ 'Could not find formatter', options.format ].join(' '));
+
+      // If invalid we return an invalid statement
+      return false;
+    }
+
+    // We prepare notation item
+    var notation = _.map(configuration.target, function (file) {
+      // Default statement
+      return {
+        file  : file,
+        grade : 20 / _.size(configuration.target)
       }
     });
 
-    // Hook into the success / fail writer.
-    hooker.hook(grunt.log.writeln(), [ 'success', 'fail' ], function (res) {
-      // Check done or aborted
-      var done    = res === 'Done, without errors.';
-      var warning = res === 'Done, but with warnings.';
-      var aborted = res === 'Aborted due to warnings.';
-      var error   = warning || aborted;
-      var state   = error ? 'error' : 'success';
-      var arts;
-      var artPath;
-      var sMsg;
-console.log(state);
-      // Default message config
-      var cMsg = {
-        level : error ? 'warn' : 'ok',
-        msg   : error ? 'Please correct your code !!! ' : 'Good Job. Padawan !!'
-      };
+    // Try to get eslint engine
+    var engine = new eslint.CLIEngine(options);
 
-      // Is finish ??
-      if (done || error) {
-        if (!_.isUndefined(currentTask)) {
-          // Need to set state before continue
-          currentTask = error;
+    // Default report value 
+    var report = {};
 
-          // Main try catch to any errors
-          try {
-            // Get file path of art path
-            artPath = [ __dirname, 'art', 'art.json' ].join('/');
+    // Do the main process on try/catch
+    try {
+      // Process on define files
+      report = engine.executeOnFiles(configuration.target);
+    } catch (err) {
+      // In this case log the error
+      grunt.log.warn(err);
 
-            // Getting file exists ?
-            if (!grunt.file.exists(artPath)) {
-              throw [ 'art config file"', artPath, '"not found.' ].join(' ');
-            }
+      // And return an invalid statement
+      return false;
+    }
 
-            // Select correct arts file content to print
-            arts = JSON.parse(grunt.file.read(artPath));
+    // Fix option is defined ?
+    if (options.fix) {
+      // Process fix
+      eslint.CLIEngine.outputFixes(report);
+    }
 
-            // Define end state
-            sMsg = {
-              color : error ? 'red' : 'green',
-              file  : _.map(arts[state], function (art) {
-                return [ __dirname, 'art', state, art ].join('/');
-              })
-            };
+    // Get result
+    var results = report.results;
+    var treeObj = {};
 
-            // Build message file
-            sMsg.file = sMsg.file[_.random(0, sMsg.file.length - 1)];
-
-            // Log message to console
-            console.log(chalk[sMsg.color](grunt.file.read(sMsg.file)));
-          } catch (e) {
-            // Log exeption, but it produces by art config
-            grunt.log.warn([ 'Plugin error.', e ].join(' '));
-
-            // Need to log end message with custom param
-            grunt.log[cMsg.level](cMsg.msg);
-          }
+    // Build a tree result to process the properly print and build notation in the same case
+    notation = _.compact(_.flattenDeep(_.map(results, function (result) {
+      // Define default object to build.
+      // We do not use _.set of lodash because property key have . in name
+      // set Value properly
+      treeObj[result.filePath] = (function () {
+        // Has error ?
+        if (result.errorCount || result.fixableErrorCount) {
+          // Error statement
+          return chalk.red('✖');
         }
-      }
-    });
 
-    // Run each given task
-    _.each(tasks, function (task) {
-      grunt.task.run(task);
-    });
+        // Has warning ?
+        if (result.warningCount || result.fixableWarningCount) {
+          // Warning statement
+          return chalk.yellow('⚠');
+        }
+
+        // Default statement
+        return chalk.green('✓');
+      }());
+
+      // Process notation part
+      return _.map(notation, function (note) {
+        // Is correct file do the notation process
+        if (_.includes(result.filePath, note.file)) {
+          // Define default delta notation
+          var errorDelta = 2 / _.size(configuration.target);
+          var warningDelta = 1 / _.size(configuration.target);
+
+          // Update grade value
+          note.grade = (result.fixableErrorCount + result.errorCount) * errorDelta;
+          note.grade += (result.fixableWarningCount + result.warningCount) * warningDelta;
+
+          // Default statement
+          return note;
+        }
+
+        // Default statement
+        return false;
+      });
+    })));
+
+    // Quiet option is defined ?
+    if (options.quiet) {
+      // Store result
+      results = eslint.CLIEngine.getErrorResults(results);
+    }
+
+    // Get output result from formatter
+    console.log(formatter(results));
+
+    // Normalize notation array
+    _.each(notation, function (note) {
+      // Build global rate
+      globalGrade = money.subtract(money.floatToAmount(globalGrade),
+        money.floatToAmount(note.grade));
+    })
+
+    // Has too many warning
+    var tooManyWarnings = options.maxWarnings >= 0 && report.warningCount > options.maxWarnings;
+
+    // Has too many warnings
+    if (report.errorCount === 0 && tooManyWarnings) {
+      grunt.log.warn([
+        'ESLint found too many warnings (maximum allowed: ', options.maxWarnings, ')'
+      ].join(''));
+    }
+
+    // All is ok ?
+    if (report.errorCount === 0 && !tooManyWarnings) {
+      // Log an ok message
+      grunt.log.ok([ 'All seems to be ok for', target ].join(' '));
+    }
+
+    // Show global result as a tree
+    console.log(treeify.asTree(treeObj, true));
+
+    // Default statement for the eslint process
+    return report.errorCount === 0 && !tooManyWarnings;
   });
+
 
   // Register default plugin process
   grunt.registerMultiTask('yoctohint', 'Manage and process code usage on yocto.', function () {
-    // Retrieve current options
-    var options = this.options();
+    // Create an async process
+    var done = this.async();
 
-    // We need to set some default before start the main process
-    options.eslint = options.eslint || {};
-    options.eslint.rules = options.eslint.rules || {};
-    options.eslint.env = options.eslint.env || {};
+    /**
+     * Main function to hint given file
+     *
+     * @return {Boolean} true in case of success, false otherwise
+     */
+    function hint () {
+      // Retrieve current options
+      var options = this.options();
 
-    // ES6 is enabled ?
-    if (!options.eslint.env.es6) {
-      // In case of ES6 env is not specified we need to remove ES6 rules to keep safe our validator
-      _.set(defaultOptions.eslint.options.rules, 'no-var', 'off');
-    }
+      // Normalize data
+      options.env = options.env || {};
 
-    // Filter file and return correct file path
-    this.data = this.filesSrc.map(function (filepath) {
-      // File is exists ?
-      if (!grunt.file.exists(filepath)) {
-        grunt.log.warn([ 'Source file"', filepath, '"not found.' ].join(' '));
+      // Forcefix is defined ?
+      if (forceFix === true) {
+        // Change the value
+        defaultOptions.eslint.options.fix = forceFix;
 
-        // Bash value returning false
-        return false;
+        // Log message for fix enabled
+        grunt.log.ok('Fix option is enabled. We use it.');
       }
 
-      // Notify to console
-      grunt.log.ok([ 'Source file "', filepath, '"exists. adding on filter list.' ].join(' '));
+      // ES6 is enabled ?
+      if (this.target === 'node') {
+        // Suffix target with correct ES value
+        this.target = [ this.target, options.env.es6 ? 'es6' : 'es5' ].join('-');
+      }
 
-      // Return file path
-      return filepath;
-    });
+      // Filter file and return correct file path
+      this.data = _.flattenDeep(this.filesSrc.map(function (filepath) {
+        // Return file path
+        return filepath;
+      }));
 
-    // Has data ?
-    if (!_.isEmpty(this.data)) {
-      // Notify console
-      grunt.log.ok([
-        this.data.length, [ 'file', this.data.length > 1 ? 's' : '' ].join(''),
-        'found. Adding on hinter list.'
-      ].join(' '));
+      // Has data ?
+      if (!_.isEmpty(this.data)) {
+        // Log message we have data
+        grunt.log.subhead([
+          this.data.length, [ 'file', this.data.length > 1 ? 's' : '' ].join(''),
+          ' was founded. We add them on hinter list.'
+        ].join(' '));
 
-      // Assign default options to config file
-      defaultOptions.eslint.target = this.data;
+        // Log tree of file
+        console.log(treeify.asTree(_.zipObject(this.data, _.map(this.data, function () {
+          // Default statement
+          return null;
+        })), true));
 
-      // Merge config data to grunt config
-      grunt.config.merge('eslint', defaultOptions.eslint);
+        // Assign default options to config file
+        defaultOptions.eslint.target = this.data;
 
-      // Notif console
-      grunt.log.ok('Ready to process checker ...');
+        // Set properly the rule config
+        defaultOptions.eslint.options.configFile = [
+          __dirname, 'rules', [ 'yocto', this.target, 'eslintrc.yaml' ].join('-')
+        ].join('/');
 
-      // Run tasks
-      grunt.task.run('yoctohint:hintchecker');
+        // Config file exists
+        if (!grunt.file.exists(defaultOptions.eslint.options.configFile)) {
+          // Warning message because config for current key is not defined
+          return grunt.log.warn([
+            'Cannot process hint for', this.target, 'beacause eslint config file is node defined'
+          ].join(' '));
+        }
+
+        // Merge config data to grunt config
+        grunt.config.merge('eslint', _.omit(defaultOptions.eslint, 'options.configFile'));
+
+        // Notif console
+        grunt.log.ok([ 'Ready to process eslint checker for', this.target ].join(' '));
+
+        // Set option for next process
+        grunt.option('eslint', defaultOptions.eslint);
+
+        // Run main task
+        return grunt.task.run([ 'yoctohint:lintchecker', this.target ].join(':'));
+      }
+
+      // Skipped in case of no file was founded
+      grunt.log.ok('No files was defined/founded. Skipping this process ...');
+
+      // Default statement
+      return true;
+    }
+
+    // Fix options if required
+    if (grunt.cli.options.fix && !forceFix) {
+      // Write important subhead message
+      grunt.log.subhead([
+        'The --fix option was requested from cli command.',
+        'This option will automatically fix rules defined on your config rules',
+        'This option use the fix method of eslint : http://eslint.org/docs/rules',
+        'This will replace matching content on your source file'
+      ].join(os.EOL));
+
+      // Prompt message to ask confirmation
+      inquirer.prompt({
+        message : [
+          'Are you sure to want to fix automatically ?',
+          '(We will force fix for all next tasks)'
+        ].join(' '),
+        name : 'fix',
+        type : 'confirm'
+      }).then(function (fix) {
+        // Change this value for the next process
+        forceFix = fix.fix;
+
+        // Call hint process with async callback
+        if (hint.call(this)) {
+          done()
+        }
+      }.bind(this))
+    } else if (hint.call(this)) {
+      // Call the end callback
+      done();
     }
   });
 
   // Node version is lower than last node LTS version ?
-  if (semver.lt(process.version, '6.10.3')) {
+  if (semver.lt(process.version, '6.0.0')) {
     // Logging message
     grunt.log.ok([ 'Changing cwd directory to load modules because version of node is',
       process.version ].join(' '));
@@ -222,8 +379,6 @@ console.log(state);
 
   // Load grunt needed task
   grunt.loadNpmTasks('grunt-nsp');
-  grunt.loadNpmTasks('grunt-pagespeed');
-  grunt.loadNpmTasks('grunt-eslint');
 
   // Go to the initial path
   process.chdir(cwd);
