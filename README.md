@@ -61,7 +61,59 @@ module.exports = function (grunt) {
 
 ## Usage for lint JSON files
 
+For Json files you must specify the `json` key on your Gruntfile like below.
+
 ## Usage for lint Node files
+
+For Node files you must specify the `node` key on your Gruntfile like below.
 
 ## Usage for lint Angular files
 
+For Angular files you must specify the `angular` key on your Gruntfile like below.
+
+## ES5 vs ES6
+
+This tools is based on eslint so we support ES6 lint features. To enable the ES6 feature you must defined in `options` property the `env` key on your Gruntfile, for example : 
+
+```
+'use strict';
+
+module.exports = function (grunt) {
+  // Project configuration.
+  grunt.initConfig({
+    // Default package
+    pkg : grunt.file.readJSON('package.json'),
+
+    // Configuration to be run (and then tested).
+    yoctohint : {
+      json : [
+        'package.json'
+      ],
+      node : [
+        'Gruntfile.js',
+        'tasks/yoctohint.js'
+      ],
+      options : {
+        env : {
+          es6 : true // this will be enable es6 for all your node files
+        }
+      }
+    }
+  });
+
+  // Actually load this plugin's task(s).
+  grunt.loadTasks('tasks');
+
+  // Load npm task
+  grunt.registerTask('test', [ 'yoctohint' ]);
+  grunt.registerTask('default', [ 'test' ]);
+};
+```
+
+# How to use --fix options of linter
+
+Some errors can be automatically fix by the linter, go do this just go : 
+
+```bash
+grunt --fix
+```
