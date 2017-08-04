@@ -377,9 +377,6 @@ module.exports = function (grunt) {
     process.chdir(path.normalize([ __dirname, '..' ].join('/')));
   }
 
-  // Load grunt needed task
-  grunt.loadNpmTasks('grunt-nsp');
-
   // Go to the initial path
   process.chdir(cwd);
 };
