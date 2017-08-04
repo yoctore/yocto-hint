@@ -1,5 +1,6 @@
 [![NPM](https://nodei.co/npm/yocto-hint.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/yocto-hint/)
 
+![alt text](https://cdn.gruntjs.com/builtwith.png)
 ![alt text](https://david-dm.org/yoctore/yocto-hint.svg "Dependencies Status")
 [![Build Status](https://travis-ci.org/yoctore/yocto-hint.svg?branch=master)](https://travis-ci.org/yoctore/yocto-hint)
 
