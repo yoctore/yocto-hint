@@ -1,3 +1,8 @@
+## 2.0.0 (2017-08-04)
+
+- Move from JsHint to EsLint
+- Core was completely rewrite.
+
 ## 1.3.0 (2016-03-01)
 
 - Add nsp security check on tools
