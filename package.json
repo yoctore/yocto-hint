@@ -60,7 +60,6 @@
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-react": "^7.1.0",
     "grunt": "^1.0.1",
-    "grunt-nsp": "^2.2.0",
     "hooker": "^0.2.3",
     "inquirer": "^3.2.1",
     "lodash": "^4.17.4",
