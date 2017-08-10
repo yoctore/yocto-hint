@@ -4,9 +4,7 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     // Default package
-    pkg : grunt.file.readJSON('package.json'),
-
-    // Configuration to be run (and then tested).
+    pkg       : grunt.file.readJSON('package.json'),
     yoctohint : {
       json : [
         'package.json'

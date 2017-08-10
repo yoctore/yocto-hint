@@ -152,7 +152,7 @@ rules:
   id-match: 0
   indent: [ 2, 2 ]
   jsx-quotes: [2 , "prefer-double" ]
-  key-spacing: [ 2, { "beforeColon" : true, "afterColon" : true, "align" : "colon" } ]
+  key-spacing: [ 2, { "singleLine": { "beforeColon": false, "afterColon": true }, "multiLine": { "beforeColon" : true, "afterColon": true }, "align": { "beforeColon" : true, "afterColon": true, "on" : "colon" } } ]
   keyword-spacing: [ 2, { "before" : true, "after" : true } ]
   line-comment-position: [ 2, { "position": "above" } ]
   linebreak-style: [ 2, "unix" ]
