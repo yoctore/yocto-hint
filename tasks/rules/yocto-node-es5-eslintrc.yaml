@@ -152,7 +152,7 @@ rules:
   id-match: 0
   indent: [ 2, 2 ]
   jsx-quotes: [2 , "prefer-double" ]
-  key-spacing: [ 2, { "singleLine": { "beforeColon": false, "afterColon": true }, "multiLine": { "beforeColon" : true, "afterColon": true }, "align": { "beforeColon" : true, "afterColon": true, "on" : "colon" } } ]
+  key-spacing: [ 2, { "multiLine": { "align": { "on": "colon", "beforeColon": true, "afterColon": true }, "beforeColon": true, "afterColon": true } } ]
   keyword-spacing: [ 2, { "before" : true, "after" : true } ]
   line-comment-position: [ 2, { "position": "above" } ]
   linebreak-style: [ 2, "unix" ]
@@ -161,7 +161,7 @@ rules:
   max-depth: [ 2, { "max" : 4 } ]
   max-len: [ 2, 100, 4, { "ignoreComments": true, "ignoreTrailingComments": true, "ignoreUrls": true, "ignoreStrings": true, "ignoreTemplateLiterals": true } ]
   max-lines: [ 2, { "max" : 3000, "skipBlankLines": true, "skipComments": true } ]
-  max-nested-callbacks: [ 2, { "max" : 5 } ]
+  max-nested-callbacks: [ 2, { "max" : 10 } ]
   max-params: [ 2, { "max" : 8 } ]
   max-statements: [2, { "max": 30 }, { "ignoreTopLevelFunctions": true } ]
   max-statements-per-line: [ 2, { "max" : 1 } ]
@@ -188,7 +188,7 @@ rules:
   no-tabs: 2
   no-ternary: 0
   no-trailing-spaces: 1
-  no-underscore-dangle: [ 2, { "allowAfterThis": true, "allowAfterSuper": true } ]
+  no-underscore-dangle: [ 2, { "allowAfterThis": true, "allowAfterSuper": true, allow : [ "_id", "_source", "__v" ] } ]
   no-unneeded-ternary: 2
   no-whitespace-before-property: 2
   nonblock-statement-body-position: [ 2, "below" ]

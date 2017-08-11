@@ -275,7 +275,11 @@ module.exports = function (grunt) {
       // ES6 is enabled ?
       if (this.target === 'node') {
         // Suffix target with correct ES value
-        this.target = [ this.target, options.env.es6 ? 'es6' : 'es5' ].join('-');
+        this.target = _.compact([
+          this.target,
+          options.env.es6 ? 'es6' : 'es5',
+          options.compatibility && !options.env.es6 ? 'compatibility' : false
+        ]).join('-');
       }
 
       // Filter file and return correct file path

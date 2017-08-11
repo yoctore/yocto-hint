@@ -1,2 +1,4 @@
 # http://eslint.org/docs/rules/
 extends: [ "./yocto-node-es5-eslintrc.yaml", "plugin:angular/johnpapa" ]
+rules:
+  angular/file-name: [2, { "typeSeparator" : "dot", "ignoreTypeSuffix" : true, "casing" : "camel" } ]

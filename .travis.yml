@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-  - 6.11.1
-  - 6.11.2
+- 6.11.1
+- 6.11.2
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
 deploy:
   provider: npm
   email: technique@yocto.re
   api_key:
-    secure: gXOZ5Pwq/MNBHVOyp2QeLqiiGEo87MHN+ikwNdNPKv/Z3dbS07eBWDBawlTgC9ErmcrMrn3nOSbjj9WrJnqI14wI/vPy3yK3Nn+nfPRwaEuAQ/ZpuW+pOs+CTTCdYI3aYwQUBA0fug8hrBK/yf55StZZo7+oC/yZog8HZtEXsnsndusMbp+Nqbm5nVzGXRao3Himd8kXYgPrrcAv7nX6PgEJSu3Qq/+7kjDuIqKggnoqRgBq3tAO1SPZfhkNI3QBtrGjB3QC7CbM5vIRlmrxyoqNsjgvICqPVhH7+nxTCzhIPSRy7U0Do0GpUDN8VqK6lKy1I7cNlfshZWOL7qxr7hz4RXjYRouN07ci4Na+PonBXhd37KeMm7xicm5XEHkqzYGZAxpXzV7lbG+WIqINi7lGlnFvcc6/vkaVBNfJrHps0ucKZ2dmmShmuF4vcHT6Sg1LmcOeLaKK+GyKLcd/Z3Tr9rMXpuqqQssdbpbNPCUUT/5y3SBTkk2VJL78jdy6TBO+1SsG9F75OEWxSUEvkhhkO2iXyrvNdoHGzVRBEMI0jctSGWMLCg+cJOYz7wgU0qq+VV/pjtdssz7lP+Ds9AM7hQmZ0q3eB4ZChxm8hccwY1YUoFTWrei/EVChwaPlN+c2wubMV++H+ELAMZ4m52G3ptpLfYoy3eMz1YUIrGI=
+    secure: bDB9J187sPMPq8sQ+9MOzdtCGx0RTz3+sKTQ4+dPeidnYeIxkeRaH8qEM/cTjbPj5mXU4FBsTQBMS6a/E3B2ZVlJmjcfeigfYisAzVf71SPhqX8sy7+ru7nV8HfnP6pNpoIvqapeoEii44KSDQAVxWNnwMcFMbb6TeHbzlNr2RCT9KXiovzX3Shob1bqtgwtTn/cXuTgLuvOx/poUtrVxGdWbuwj5FRwvPFEM0HTDVWjRDnhrG5mR+801U8BXr43ldZWwA70UoZUNHQHOk0CGqWpFGEZJ7Y+AZ7mRFfAfR74ICAQ7cxPQuuU5UMQGyP8iHVwPV35KoZiZVLlRnZ3udrWLVLTTmDAwYiwpiz9BoFwTJEWcEf0SnbntjB22M0EB8TcVBQpxFN5eIepDCjh15pFTdS7xLTULJC7Qj4pKC81XkuzFPK8xw0Xj9UrdM1M6LhElDAnRItVaw1DHOQ5FpmenYABRirknltlCOMmj4AA6UCf+UHJBd56BsMOMPL0VYGgOtNEuAgf4TcXzjaenDVZozyLj2GJL8S/XpJ0ZazwwJuAtTln9l5vua5XLKj7bR8BB0qrEL8RthwgvyNEOsFNp4pkpjJYvS5WNkS3ivf0cv4vN5jVNCLEFEJfJSIEPYfOTVV8mCLPBdPuDD2DoZ7MvCyEP6i93x5fMjCN73M=
   on:
     tags: true
     repo: yoctore/yocto-hint

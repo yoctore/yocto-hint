@@ -2,6 +2,7 @@
 
 - Move from JsHint to EsLint
 - Core was completely rewrite.
+- Compatibility rules was added
 
 ## 1.3.0 (2016-03-01)
 

@@ -118,3 +118,40 @@ Some errors can be automatically fix by the linter, go do this just go :
 ```bash
 grunt --fix
 ```
+
+# Compatibility with older hint process
+
+For some rules compatibility is required with our old hinter tool.
+To use this compatibility and not check old rules with grunt like below : 
+
+```
+'use strict';
+
+module.exports = function (grunt) {
+  // Project configuration.
+  grunt.initConfig({
+    // Default package
+    pkg : grunt.file.readJSON('package.json'),
+
+    // Configuration to be run (and then tested).
+    yoctohint : {
+      json : [
+        'package.json'
+      ],
+      node : [
+        'Gruntfile.js',
+        'tasks/yoctohint.js'
+      ],
+      options : {
+        compatibility : true // to enable compatibility rules enabled
+      }
+    }
+  });
+
+  // Actually load this plugin's task(s).
+  grunt.loadTasks('tasks');
+
+  // Load npm task
+  grunt.registerTask('test', [ 'yoctohint' ]);
+  grunt.registerTask('default', [ 'test' ]);
+};
