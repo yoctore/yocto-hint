@@ -12,11 +12,15 @@ addons:
     - g++-4.8
 before_install: npm install -g grunt-cli
 install: npm install
-deploy:
-  provider: npm
-  email: technique@yocto.re
-  api_key:
-    secure: GWKCsRZ/khNG2IxsWWIATFO2fwnlL/W3n2c4m9zVmyub0HvfmWsRqVH9gdCxC3QIYyp2LyzVmmCIJI0JAnubVCdFTAz9N//ahIrOsqYgqRF3mc4lllqz6dXTPZycLCMU+mDV7KZJbeNIQwICY+0AERVIUIFHsMBu+VebD6uXlIpoNkTTVlMrDKtl84p3B57qRniKn1m1WfyUBM1atd1zMzcFUvxnl8Nr5tyDczkyfRPyHenxruwA59+ILmdgyXWw1U5pnN62EkKauacLhMzGrow2MsE7+V3u/SAED4TK1vZYuluIKLBqqUnKMHhJlTh7prVAFi98cKZY0VYiuY/hU+b9eH0P+uNXpiwoM84KPZKufHPjqSyJaA6l3d3YftKkB//EiKM2XqwaCUVEtKs3oWmiPU9mFbEx0sQI8E2EUx1myNNzpK4t0NE2FSusgf4meioLgGUVdfUOGLL9ZPiZmZ5/MFV85q4Dvj4pjZ0rl7B+1nD5LBXtyhkCXFztP4juYZcCFT2tsCs+ftNlfNvOYXu4PJ+aFJciCTi8U/3dUsXG1sz3loN7e5NYtkt4hqrAVQty+k4OG/jRp+ifv7bvOb7rnQEOhP2XuMzuN57HLftdnParZJWWn5Mr2Z3qxF7jw4tkhSqEJM/b4VMlsJlUbZE2G82yUUW0PnY57IubXvU=
-  on:
-    tags: true
-    repo: yoctore/yocto-hint
+jobs:
+  include:
+    - stage: deploy
+      node_js: 6.11.2
+      deploy:
+        provider: npm
+        email: technique@yocto.re
+        api_key:
+          secure: GWKCsRZ/khNG2IxsWWIATFO2fwnlL/W3n2c4m9zVmyub0HvfmWsRqVH9gdCxC3QIYyp2LyzVmmCIJI0JAnubVCdFTAz9N//ahIrOsqYgqRF3mc4lllqz6dXTPZycLCMU+mDV7KZJbeNIQwICY+0AERVIUIFHsMBu+VebD6uXlIpoNkTTVlMrDKtl84p3B57qRniKn1m1WfyUBM1atd1zMzcFUvxnl8Nr5tyDczkyfRPyHenxruwA59+ILmdgyXWw1U5pnN62EkKauacLhMzGrow2MsE7+V3u/SAED4TK1vZYuluIKLBqqUnKMHhJlTh7prVAFi98cKZY0VYiuY/hU+b9eH0P+uNXpiwoM84KPZKufHPjqSyJaA6l3d3YftKkB//EiKM2XqwaCUVEtKs3oWmiPU9mFbEx0sQI8E2EUx1myNNzpK4t0NE2FSusgf4meioLgGUVdfUOGLL9ZPiZmZ5/MFV85q4Dvj4pjZ0rl7B+1nD5LBXtyhkCXFztP4juYZcCFT2tsCs+ftNlfNvOYXu4PJ+aFJciCTi8U/3dUsXG1sz3loN7e5NYtkt4hqrAVQty+k4OG/jRp+ifv7bvOb7rnQEOhP2XuMzuN57HLftdnParZJWWn5Mr2Z3qxF7jw4tkhSqEJM/b4VMlsJlUbZE2G82yUUW0PnY57IubXvU=
+        on:
+          tags: true
+          repo: yoctore/yocto-hint
