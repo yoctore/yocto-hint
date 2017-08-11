@@ -33,7 +33,7 @@ rules:
   no-unsafe-finally: 2
   no-unsafe-negation: 2
   use-isnan: 2
-  valid-jsdoc: 2
+  valid-jsdoc: [ 2, { "requireReturn" : false, prefer : { "returns" : "return"  }, "requireReturnType" : true } ]
   valid-typeof: 2
   # Best Pratices
   accessor-pairs: 2
@@ -175,12 +175,12 @@ rules:
   no-bitwise: 2
   no-continue: 2
   no-inline-comments: 2
-  no-lonely-if: 2
+  no-lonely-if: 0
   no-mixed-operators: 2
   no-mixed-spaces-and-tabs: 2
   no-multi-assign: 2
   no-multiple-empty-lines: [ 1, { "max" : 2, "maxBOF" : 1} ]
-  no-negated-condition: 2
+  no-negated-condition: 0
   no-nested-ternary: 2
   no-new-object: 1
   no-plusplus: 0

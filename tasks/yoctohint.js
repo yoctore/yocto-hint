@@ -16,7 +16,6 @@ var money     = require('money-math');
  * Default export for grunt yocto-norme-plugin
  *
  * @param {string} grunt default grunt instance to use on current module
- * @return {function} hinter task module
  */
 module.exports = function (grunt) {
   // Require external module time grunt to get metrics on execution task
