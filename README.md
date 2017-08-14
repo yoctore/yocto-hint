@@ -1,6 +1,7 @@
 [![NPM](https://nodei.co/npm/yocto-hint.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/yocto-hint/)
 
 ![alt text](https://cdn.gruntjs.com/builtwith.png)
+[![Node Required version](https://img.shields.io/badge/node-%3E%3D6.11.2-brightgreen.svg)]()
 ![alt text](https://david-dm.org/yoctore/yocto-hint.svg "Dependencies Status")
 [![Build Status](https://travis-ci.org/yoctore/yocto-hint.svg?branch=master)](https://travis-ci.org/yoctore/yocto-hint)
 
@@ -50,7 +51,7 @@ module.exports = function (grunt) {
   });
 
   // Actually load this plugin's task(s).
-  grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('yocto-hint');
 
   // Load npm task
   grunt.registerTask('test', [ 'yoctohint' ]);
@@ -103,7 +104,7 @@ module.exports = function (grunt) {
   });
 
   // Actually load this plugin's task(s).
-  grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('yocto-hint');
 
   // Load npm task
   grunt.registerTask('test', [ 'yoctohint' ]);
@@ -149,7 +150,7 @@ module.exports = function (grunt) {
   });
 
   // Actually load this plugin's task(s).
-  grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('yocto-hint');
 
   // Load npm task
   grunt.registerTask('test', [ 'yoctohint' ]);
