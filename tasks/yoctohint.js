@@ -48,59 +48,65 @@ module.exports = function (grunt) {
 
   // Define hooker for the last step of hinter
   hooker.hook(grunt.log.writeln(), [ 'success', 'fail' ], function (res) {
-    // Check done or aborted
-    var done    = res === 'Done, without errors.' || 'Done.';
-    var warning = res === 'Done, but with warnings.';
-    var aborted = res === 'Aborted due to warnings.';
-    var error   = warning || aborted;
-    var state   = error ? 'error' : 'success';
-    var arts;
-    var artPath;
-    var sMsg;
+    // Is yocto-hint ?
+    if (grunt.hookname === 'yocto-hint') {
+      // Check done or aborted
+      var done    = res === 'Done, without errors.' || 'Done.';
+      var warning = res === 'Done, but with warnings.';
+      var aborted = res === 'Aborted due to warnings.';
+      var error   = warning || aborted;
+      var state   = error ? 'error' : 'success';
+      var arts;
+      var artPath;
+      var sMsg;
 
-    // Default message config
-    var cMsg = {
-      level : error ? 'warn' : 'ok',
-      msg   : error ? 'Please correct your code !!! ' : 'Good Job. Padawan !!'
-    };
+      // Default message config
+      var cMsg = {
+        level : error ? 'warn' : 'ok',
+        msg   : error ? 'Please correct your code !!! ' : 'Good Job. Padawan !!'
+      };
 
-    // Is finish ??
-    if (done || error) {
-      // Main try catch to any errors
-      try {
-        // Get file path of art path
-        artPath = [ __dirname, 'art', 'art.json' ].join('/');
+      // Is finish ??
+      if (done || error) {
+        // Main try catch to any errors
+        try {
+          // Get file path of art path
+          artPath = [ __dirname, 'art', 'art.json' ].join('/');
 
-        // Getting file exists ?
-        if (!grunt.file.exists(artPath)) {
-          throw [ 'art config file"', artPath, '"not found.' ].join(' ');
+          // Getting file exists ?
+          if (!grunt.file.exists(artPath)) {
+            throw [ 'art config file"', artPath, '"not found.' ].join(' ');
+          }
+
+          // Select correct arts file content to print
+          arts = JSON.parse(grunt.file.read(artPath));
+
+          // Define end state
+          sMsg = {
+            color : error ? 'red' : 'green',
+            file  : _.map(arts[state], function (art) {
+              return [ __dirname, 'art', state, art ].join('/');
+            })
+          };
+
+          // Build message file
+          sMsg.file = sMsg.file[_.random(0, sMsg.file.length - 1)];
+
+          // Log message to console
+          console.log(chalk[sMsg.color](grunt.file.read(sMsg.file)));
+
+          // Print grade
+          console.log(chalk[sMsg.color]([ 'Your grade is : ', globalGrade, '/20' ].join('')));
+        } catch (e) {
+          // Log exeption, but it produces by art config
+          grunt.log.warn([ 'Plugin error.', e ].join(' '));
+
+          // Need to log end message with custom param
+          grunt.log[cMsg.level](cMsg.msg);
         }
 
-        // Select correct arts file content to print
-        arts = JSON.parse(grunt.file.read(artPath));
-
-        // Define end state
-        sMsg = {
-          color : error ? 'red' : 'green',
-          file  : _.map(arts[state], function (art) {
-            return [ __dirname, 'art', state, art ].join('/');
-          })
-        };
-
-        // Build message file
-        sMsg.file = sMsg.file[_.random(0, sMsg.file.length - 1)];
-
-        // Log message to console
-        console.log(chalk[sMsg.color](grunt.file.read(sMsg.file)));
-
-        // Print grade
-        console.log(chalk[sMsg.color]([ 'Your grade is : ', globalGrade, '/20' ].join('')));
-      } catch (e) {
-        // Log exeption, but it produces by art config
-        grunt.log.warn([ 'Plugin error.', e ].join(' '));
-
-        // Need to log end message with custom param
-        grunt.log[cMsg.level](cMsg.msg);
+        // In all case we remove hook
+        hooker.unhook(grunt.log.writeln());
       }
     }
   });
@@ -256,6 +262,9 @@ module.exports = function (grunt) {
      * @return {Boolean} true in case of success, false otherwise
      */
     function hint () {
+      // Set a flag to know we are in yoctohint process is only for hook process
+      grunt.hookname = 'yocto-hint';
+
       // Retrieve current options
       var options = this.options();
 

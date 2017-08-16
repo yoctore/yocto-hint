@@ -1,3 +1,7 @@
+## 2.0.0 > 2.0.3 (2017-08-16)
+
+- Minor fix on hook process and rules for angular
+
 ## 2.0.0 (2017-08-04)
 
 - Move from JsHint to EsLint
