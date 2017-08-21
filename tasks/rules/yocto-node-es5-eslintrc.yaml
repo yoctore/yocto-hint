@@ -40,7 +40,7 @@ rules:
   array-callback-return: 2
   block-scoped-var: 2
   class-methods-use-this: 1
-  complexity: [ 2, 15 ]
+  complexity: [ 2, 20 ]
   consistent-return: 1
   curly: 0
   default-case: 0
@@ -205,7 +205,7 @@ rules:
   require-jsdoc: [ 2, { "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true } } ]
   semi: 0
   semi-spacing: [ 2, { "before" : false, "after": true } ]
-  sort-keys: [ 1, "asc", { "caseSensitive" : true, "natural" : false } ]
+  sort-keys: 0
   sort-vars: 0
   space-before-blocks: [ 2, "always" ]
   space-before-function-paren: [ 2, "always" ]
