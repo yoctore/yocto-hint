@@ -1,4 +1,4 @@
-## 2.0.0 > 2.0.3 (2017-08-16)
+## 2.0.0 > 2.0.4 (2017-08-16)
 
 - Minor fix on hook process and rules for angular
 
