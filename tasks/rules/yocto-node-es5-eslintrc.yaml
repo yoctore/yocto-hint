@@ -40,7 +40,7 @@ rules:
   array-callback-return: 2
   block-scoped-var: 2
   class-methods-use-this: 1
-  complexity: [ 2, 20 ]
+  complexity: [ 2, 30 ]
   consistent-return: 1
   curly: 0
   default-case: 0
