@@ -163,7 +163,7 @@ rules:
   max-lines: [ 2, { "max" : 3000, "skipBlankLines": true, "skipComments": true } ]
   max-nested-callbacks: [ 2, { "max" : 10 } ]
   max-params: [ 2, { "max" : 8 } ]
-  max-statements: [2, { "max": 30 }, { "ignoreTopLevelFunctions": true } ]
+  max-statements: [2, { "max": 50 }, { "ignoreTopLevelFunctions": true } ]
   max-statements-per-line: [ 2, { "max" : 1 } ]
   multiline-ternary: off
   new-cap: [ 2, { "newIsCap": true, "capIsNew": true, "properties": false } ]
