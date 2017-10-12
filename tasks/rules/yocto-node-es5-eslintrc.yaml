@@ -176,7 +176,7 @@ rules:
   no-continue: 2
   no-inline-comments: 2
   no-lonely-if: 0
-  no-mixed-operators: 2
+  no-mixed-operators: [ 2, { "groups" : [ [ "&", "|", "^", "~", "<<", ">>", ">>>" ], [ "&&", "||" ] ] } ]
   no-mixed-spaces-and-tabs: 2
   no-multi-assign: 2
   no-multiple-empty-lines: [ 1, { "max" : 2, "maxBOF" : 1} ]

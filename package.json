@@ -1,7 +1,7 @@
 {
   "name": "yocto-hint",
   "description": "Manage and process code usage on yocto.re project. Valid current code with Eslint.",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "author": {
     "name": "Yocto SAS",
     "email": "technique@yocto.re",
