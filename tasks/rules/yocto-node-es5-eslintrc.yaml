@@ -188,7 +188,7 @@ rules:
   no-tabs: 2
   no-ternary: 0
   no-trailing-spaces: 1
-  no-underscore-dangle: [ 2, { "allowAfterThis": true, "allowAfterSuper": true, allow : [ "_id", "_source", "__v" ] } ]
+  no-underscore-dangle: [ 2, { "allowAfterThis": true, "allowAfterSuper": true, allow : [ "_id", "_source", "__v", "_d" ] } ]
   no-unneeded-ternary: 2
   no-whitespace-before-property: 2
   nonblock-statement-body-position: [ 2, "below" ]

@@ -2,5 +2,7 @@
 extends: [ "./yocto-node-es5-eslintrc.yaml" ]
 rules:
  sort-keys: 0
- max-lines: [ 2, { "max" : 5000, "skipBlankLines": true, "skipComments": true } ],
+ max-lines: [ 2, { "max" : 5000, "skipBlankLines": true, "skipComments": true } ]
  consistent-return: 0
+ global-require: 0
+ no-mixed-operators: 0
