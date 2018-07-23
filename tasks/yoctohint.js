@@ -143,7 +143,7 @@ module.exports = function (grunt) {
     // Try to get eslint engine
     var engine = new eslint.CLIEngine(options);
 
-    // Default report value 
+    // Default report value
     var report = {};
 
     // Do the main process on try/catch
