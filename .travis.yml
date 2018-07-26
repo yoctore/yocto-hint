@@ -1,7 +1,6 @@
 language: node_js
 node_js:
-- 6.11.1
-- 6.11.2
+- 8.11.3
 env:
 - CXX=g++-4.8
 addons:
@@ -14,13 +13,13 @@ before_install: npm install -g grunt-cli
 install: npm install
 jobs:
   include:
-    - stage: deploy
-      node_js: 6.11.2
-      deploy:
-        provider: npm
-        email: technique@yocto.re
-        api_key:
-          secure: GWKCsRZ/khNG2IxsWWIATFO2fwnlL/W3n2c4m9zVmyub0HvfmWsRqVH9gdCxC3QIYyp2LyzVmmCIJI0JAnubVCdFTAz9N//ahIrOsqYgqRF3mc4lllqz6dXTPZycLCMU+mDV7KZJbeNIQwICY+0AERVIUIFHsMBu+VebD6uXlIpoNkTTVlMrDKtl84p3B57qRniKn1m1WfyUBM1atd1zMzcFUvxnl8Nr5tyDczkyfRPyHenxruwA59+ILmdgyXWw1U5pnN62EkKauacLhMzGrow2MsE7+V3u/SAED4TK1vZYuluIKLBqqUnKMHhJlTh7prVAFi98cKZY0VYiuY/hU+b9eH0P+uNXpiwoM84KPZKufHPjqSyJaA6l3d3YftKkB//EiKM2XqwaCUVEtKs3oWmiPU9mFbEx0sQI8E2EUx1myNNzpK4t0NE2FSusgf4meioLgGUVdfUOGLL9ZPiZmZ5/MFV85q4Dvj4pjZ0rl7B+1nD5LBXtyhkCXFztP4juYZcCFT2tsCs+ftNlfNvOYXu4PJ+aFJciCTi8U/3dUsXG1sz3loN7e5NYtkt4hqrAVQty+k4OG/jRp+ifv7bvOb7rnQEOhP2XuMzuN57HLftdnParZJWWn5Mr2Z3qxF7jw4tkhSqEJM/b4VMlsJlUbZE2G82yUUW0PnY57IubXvU=
-        on:
-          tags: true
-          repo: yoctore/yocto-hint
+  - stage: deploy
+    node_js: 8.11.3
+    deploy:
+      provider: npm
+      email: technique@yocto.re
+      api_key:
+        secure: SBuvAuHkFmkiHinJJqf3IpJzJviwiWEmNGC6VbGvHWP1FI/fMzNemb5ighQyyKWIjvzkkJWpl7IvZ5VTREFW0pcL9/PNQ0kJyWxUIp+agHXvryZhzyJbDVRE3p74/1vXa9q9flObgjP27CawM8yF6fzr7WMlHCY9F/xD7lrn3GD5+PydHbrGLOCvt7bWfClO4C3OkHTC5QW5pKjHtXuV27ohFcosWG8WB/jwXmLam3cNsGmW27K0KHMBPJVY5rJbTo7j5zYMniMdyP55k+WjdPTbIF57C06smrGl7GvFXCyf+L2G9qZDTrxyHKuHiWo7zqndr5dAqnWBb1A1rsfrmxnsB7RAO2Am6TYsfbhWch68bkdbcxcsEyxKaxkGezyFveWf+etrdxCvClimiG+qoiIXp0scp6oz8gJYMx5kakmKIN1VzwFB2XwS6F+vZW+ju7X1gtyKuOni/1EAizzPMhwcwbzP6+Ie7MuBVpqJpDOqcTB1U5x6CNHSxXJD2i4TQxQMn66mc7vdMjyC5IYaRyjJ+ZnUR37uyfBkJ3Y3ZvlRNjgUeJASPr72k507GWJ5kGiUxBOM+Ll2LNxTs0YzmuYIjOVThrSW2KBgbSTbGh5dfnXVYQi7nrOBu3b7eVm0RciWTR15QIiNqlNf3miUpGQXQoJ7dBcCixmFpHyxhfw=
+      on:
+        tags: true
+        repo: yoctore/yocto-hint
