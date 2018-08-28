@@ -159,7 +159,7 @@ rules:
   lines-around-comment: [ 2, { "beforeBlockComment": true, "afterBlockComment": false, "beforeLineComment": true, "afterLineComment": false, "allowBlockStart": true, "allowBlockEnd": true, "allowObjectStart": true, "allowObjectEnd": true, "allowArrayStart": true, "allowArrayEnd": true } ]
   lines-around-directive: [ 2, "always" ]
   max-depth: [ 2, { "max" : 4 } ]
-  max-len: [ 2, 100, 4, { "ignoreComments": true, "ignoreTrailingComments": true, "ignoreUrls": true, "ignoreStrings": true, "ignoreTemplateLiterals": true } ]
+  max-len: [ 2, { "code" : 100, "tabWidth" : 4, "ignoreComments": true, "ignoreTrailingComments": true, "ignoreUrls": true, "ignoreStrings": false, "ignoreTemplateLiterals": true } ]
   max-lines: [ 2, { "max" : 3000, "skipBlankLines": true, "skipComments": true } ]
   max-nested-callbacks: [ 2, { "max" : 10 } ]
   max-params: [ 2, { "max" : 8 } ]

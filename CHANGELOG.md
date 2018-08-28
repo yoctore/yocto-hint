@@ -1,3 +1,8 @@
+## 2.0.9 > 2.1.1 (2018-08-28)
+
+- Update dependencies and core module
+- Update rules for max-len
+
 ## 2.0.0 > 2.0.9 (2017-08-16)
 
 - Minor fix on hook process and rules for angular
