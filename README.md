@@ -60,7 +60,6 @@ module.exports = function (grunt) {
 
 // and run grunt hint in your shell
 ```
-
 ## Usage for lint JSON files
 
 For Json files you must specify the `json` key on your Gruntfile like below.
@@ -77,7 +76,7 @@ For Angular files you must specify the `angular` key on your Gruntfile like belo
 
 This tools is based on eslint so we support ES6 lint features. To enable the ES6 feature you must defined in `options` property the `env` key on your Gruntfile, for example : 
 
-```
+```javascript
 'use strict';
 
 module.exports = function (grunt) {
@@ -122,10 +121,10 @@ grunt --fix
 
 # Compatibility with older hint process
 
-For some rules compatibility is required with our old hinter tool.
-To use this compatibility and not check old rules with grunt like below : 
+In some case we need use compatibility ruls from our older tool.
+To use this compatibility and not check old rules with grunt like below :
 
-```
+```javascript
 'use strict';
 
 module.exports = function (grunt) {

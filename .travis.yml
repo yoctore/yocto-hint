@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 8.11.3
+- 8.11.4
 env:
 - CXX=g++-4.8
 addons:
@@ -14,7 +14,7 @@ install: npm install
 jobs:
   include:
   - stage: deploy
-    node_js: 8.11.3
+    node_js: 8.11.4
     deploy:
       provider: npm
       email: technique@yocto.re
